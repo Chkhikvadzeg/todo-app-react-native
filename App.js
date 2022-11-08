@@ -1,20 +1,48 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Button, ImageBackground, StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import { useState } from "react";
+import Header from "./components/Header";
 
-export default function App() {
+const App = () => {
+  const [isBlack, setIsBlack] = useState(false);
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <ImageBackground
+        source={isBlack ? require('./assets/bg-mobile-dark.jpg') : require('./assets/bg-mobile-light.jpg')}
+        resizeMode="cover"
+        style={styles.bgImage}>
+      </ImageBackground>
+      <Header isBlack={isBlack} setIsBlack={setIsBlack} />
     </View>
-  );
+  )
 }
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
+  bgImage: {
+    width: "100%",
+    height: 250,
+    backgroundColor: '#000',
+    position: 'absolute',
+    top: 0,
+    zIndex: -1,
+  },
+  text: {
+    color: "grey",
+    fontSize: 30,
+    fontWeight: "bold"
+  },
+  header: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingTop: 80,
+    paddingHorizontal: 24,
+  }
+
 });
+
+export default App;

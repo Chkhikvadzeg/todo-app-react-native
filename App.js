@@ -1,16 +1,13 @@
-import { Button, ImageBackground, StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import { ImageBackground, StyleSheet, View, } from "react-native";
 import { useState } from "react";
 import Header from "./components/Header";
+import BackgroundImage from "./components/BackgroundImage";
 
 const App = () => {
   const [isBlack, setIsBlack] = useState(false);
   return (
     <View style={styles.container}>
-      <ImageBackground
-        source={isBlack ? require('./assets/bg-mobile-dark.jpg') : require('./assets/bg-mobile-light.jpg')}
-        resizeMode="cover"
-        style={styles.bgImage}>
-      </ImageBackground>
+      <BackgroundImage isBlack={isBlack} />
       <Header isBlack={isBlack} setIsBlack={setIsBlack} />
     </View>
   )

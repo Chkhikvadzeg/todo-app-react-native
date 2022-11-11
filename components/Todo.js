@@ -2,7 +2,7 @@ import { TouchableOpacity, View, Text, StyleSheet } from "react-native"
 import Checkbox from "./Checkbox"
 import IconX from "./IconX";
 
-export default function Todo({ todo, removeTodo, toDos, setToDos, isBlack, filteredToDos, setFilteredToDos, filterType }) {
+export default function Todo({ todo, removeTodo, toDos, setToDos, isBlack, setFilteredToDos, filterType }) {
   const handlePress = () => {
     const newToDos = toDos.map((item) => {
       if (item.id === todo.id) {

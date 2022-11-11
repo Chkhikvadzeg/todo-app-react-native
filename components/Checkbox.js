@@ -1,5 +1,5 @@
 import { LinearGradient } from "expo-linear-gradient"
-import { StyleSheet, Image } from "react-native"
+import { StyleSheet } from "react-native"
 import CheckboxIcon from "./CheckIcon"
 
 export default function Checkbox({ todo, isBlack }) {

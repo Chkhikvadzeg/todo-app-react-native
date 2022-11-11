@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, TextInput, Pressable } from 'react-native'
+import { View, StyleSheet, Image, TextInput, Pressable } from 'react-native'
 import React, { useState, useRef } from 'react'
 import { LinearGradient } from 'expo-linear-gradient'
 

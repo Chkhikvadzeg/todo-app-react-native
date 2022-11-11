@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, Pressable } from 'react-native'
 
-export default function Filters({ isBlack, filterType, setFilterType, setFilteredToDos, filteredToDos, toDos, setToDos }) {
+export default function Filters({ isBlack, filterType, setFilterType, setFilteredToDos, toDos }) {
   const filters = [
     { id: 1, text: 'All' },
     { id: 2, text: 'Active' },

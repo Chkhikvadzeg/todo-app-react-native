@@ -1,11 +1,12 @@
 import { LinearGradient } from "expo-linear-gradient"
 import { StyleSheet, Image } from "react-native"
+import CheckboxIcon from "./CheckIcon"
 
 export default function Checkbox({ todo, isBlack }) {
 
   return (
     <LinearGradient colors={todo.completed ? ['#55DDFF', '#C058F3'] : ['transparent', 'transparent']} star={{ x: 0.75, y: 0 }} style={{ ...styles.checkbox, borderColor: isBlack ? '#393A4B' : '#E3E4F1' }}>
-      {todo.completed && <Image source={require('../assets/icon-check.png')} />}
+      {todo.completed && <CheckboxIcon />}
     </LinearGradient>
   )
 }

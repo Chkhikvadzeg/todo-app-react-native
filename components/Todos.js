@@ -1,16 +1,21 @@
 import Todo from "./Todo"
 import AddToDo from "./AddToDo"
 import { StyleSheet, SafeAreaView, FlatList, View, Text, TouchableOpacity } from "react-native"
+import Filters from "./Filters"
 
-export default function ToDos({ toDos, setToDos, removeTodo, isBlack }) {
+export default function ToDos({ toDos, setToDos, removeTodo, isBlack, filteredToDos, setFilteredToDos, filterType, setFilterType }) {
+  const clearCompleted = () => {
+    setToDos(toDos.filter((todo) => !todo.completed))
+    setFilteredToDos(filteredToDos.filter((todo) => !todo.completed))
+  }
   return (
     <SafeAreaView>
       <View>
-        <AddToDo setToDos={setToDos} toDos={toDos} isBlack={isBlack} />
+        <AddToDo filterType={filterType} filteredToDos={filteredToDos} setFilteredToDos={setFilteredToDos} setToDos={setToDos} toDos={toDos} isBlack={isBlack} />
         <View style={{ ...styles.container, backgroundColor: isBlack ? '#25273D' : '#FFFFFF' }}>
           <FlatList
-            data={toDos}
-            renderItem={({ item }) => <Todo isBlack={isBlack} setToDos={setToDos} toDos={toDos} todo={item} removeTodo={removeTodo} />}
+            data={filteredToDos}
+            renderItem={({ item }) => <Todo filterType={filterType} filteredToDos={filteredToDos} setFilteredToDos={setFilteredToDos} isBlack={isBlack} setToDos={setToDos} toDos={toDos} todo={item} removeTodo={removeTodo} />}
             keyExtractor={item => item.id}
           />
           <View style={styles.footer}>
@@ -18,11 +23,12 @@ export default function ToDos({ toDos, setToDos, removeTodo, isBlack }) {
               {toDos.filter(todo => !todo.completed).length} items left
             </Text>
             <TouchableOpacity
-              onPress={() => setToDos(toDos.filter(todo => !todo.completed))}>
-              <Text style={{ ...styles.text, color: isBlack ? '#5B5E7E' : '#9495A5' }}>Clear All</Text>
+              onPress={clearCompleted}>
+              <Text style={{ ...styles.text, color: isBlack ? '#5B5E7E' : '#9495A5' }}>Clear Completed</Text>
             </TouchableOpacity>
           </View>
         </View>
+        <Filters filterType={filterType} setFilterType={setFilterType} toDos={toDos} setToDos={setToDos} filteredToDos={filteredToDos} setFilteredToDos={setFilteredToDos} isBlack={isBlack} />
       </View>
     </SafeAreaView>
   )

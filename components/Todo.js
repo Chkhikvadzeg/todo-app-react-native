@@ -1,19 +1,29 @@
 import { TouchableOpacity, View, Text, StyleSheet } from "react-native"
 import Checkbox from "./Checkbox"
+import IconX from "./IconX";
 
-export default function Todo({ todo, removeTodo, toDos, setToDos, isBlack }) {
+export default function Todo({ todo, removeTodo, toDos, setToDos, isBlack, filteredToDos, setFilteredToDos, filterType }) {
   const handlePress = () => {
     const newToDos = toDos.map((item) => {
       if (item.id === todo.id) {
         return {
           ...item,
-          completed: !item.completed,
+          completed: !item.completed
         }
       }
       return item
     });
     setToDos(newToDos)
+
+    if (filterType === "Active") {
+      setFilteredToDos(newToDos.filter((todo) => !todo.completed))
+    } else if (filterType === "Completed") {
+      setFilteredToDos(newToDos.filter((todo) => todo.completed))
+    } else {
+      setFilteredToDos(newToDos)
+    }
   }
+
   return (
     <View style={{ ...styles.container, borderBottomColor: isBlack ? '#393A4B' : '#E3E4F1' }}>
       <TouchableOpacity style={styles.flex} onPress={handlePress}>
@@ -26,7 +36,7 @@ export default function Todo({ todo, removeTodo, toDos, setToDos, isBlack }) {
           }}>{todo.text}</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.removeIcon} onPress={() => removeTodo(todo.id)}>
-        <Text>X</Text>
+        <IconX />
       </TouchableOpacity>
     </View>
   )
@@ -37,8 +47,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    height: 50,
     paddingLeft: 20,
+    paddingVertical: 16,
     borderBottomWidth: 1,
   },
   flex: {
@@ -46,10 +56,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   removeIcon: {
-    height: 50,
-    width: 50,
-    justifyContent: "center",
-    alignItems: "center",
+    paddingRight: 20,
   },
   text: {
     fontSize: 12,

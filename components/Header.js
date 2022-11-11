@@ -1,12 +1,17 @@
-import { View, Image, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Image, StyleSheet, Pressable } from 'react-native'
+import MoonIcon from './Moon';
+import SunIcon from './Sun';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Header({ isBlack, setIsBlack }) {
+
+
   return (
     <View style={styles.header}>
-      <Image source={require('../assets/logo.png')} />
-      <TouchableOpacity onPress={() => setIsBlack(!isBlack)}>
-        <Image source={isBlack ? require('../assets/sun.png') : require('../assets/moon.png')} />
-      </TouchableOpacity>
+      <Image style={styles.logo} source={require('../assets/logo.png')} />
+      <Pressable hitSlop={30} style={({ pressed }) => ({ opacity: pressed ? 0.2 : 1 })} onPress={() => setIsBlack(prev => !prev)}>
+        {isBlack ? <SunIcon /> : <MoonIcon />}
+      </Pressable>
     </View>
   )
 }
@@ -20,5 +25,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: 48,
     paddingHorizontal: 24,
+  },
+  logo: {
+    width: 109,
+    aspectRatio: 108 / 20
   }
 });

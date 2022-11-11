@@ -1,8 +1,8 @@
-import { View, Text, StyleSheet, TouchableOpacity, Image, TextInput } from 'react-native'
+import { View, Text, StyleSheet, Image, TextInput, Pressable } from 'react-native'
 import React, { useState, useRef } from 'react'
 import { LinearGradient } from 'expo-linear-gradient'
 
-export default function AddToDo({ toDos, setToDos, isBlack }) {
+export default function AddToDo({ toDos, setToDos, isBlack, filteredToDos, setFilteredToDos, filterType }) {
   const [completed, setCompleted] = useState(false)
   const [text, setText] = useState('')
   const inputRef = useRef()
@@ -10,20 +10,41 @@ export default function AddToDo({ toDos, setToDos, isBlack }) {
     setText(val)
   }
   const addListener = (e) => {
-    setToDos([...toDos, { id: toDos.length + 1, text: e.nativeEvent.text, completed }])
+    setToDos(
+      [...toDos,
+      { id: toDos.length > 0 ? toDos[toDos.length - 1].id + 1 : 0, text: e.nativeEvent.text, completed }
+      ]
+    )
+    const newFilteredToDos = () => {
+      if (completed) {
+        if (filterType === 'Completed' || filterType === 'All') {
+          return [...filteredToDos, { id: toDos.length > 0 ? toDos[toDos.length - 1].id + 1 : 0, text: e.nativeEvent.text, completed }]
+        } else {
+          return filteredToDos
+        }
+      } else {
+        if (filterType === 'Active' || filterType === 'All') {
+          return [...filteredToDos, { id: toDos.length > 0 ? toDos[toDos.length - 1].id + 1 : 0, text: e.nativeEvent.text, completed }]
+        } else {
+          return filteredToDos
+        }
+      }
+    }
+    setFilteredToDos(newFilteredToDos());
     setText('')
     inputRef.current.blur()
   }
   return (
     <View style={{ ...styles.container, backgroundColor: isBlack ? '#25273D' : '#FFFFFF' }}>
-      <TouchableOpacity onPress={() => setCompleted(prev => !prev)} >
+      <Pressable onPress={() => setCompleted(prev => !prev)} >
         <LinearGradient colors={completed ? ['#55DDFF', '#C058F3'] : ['transparent', 'transparent']} star={{ x: 0.75, y: 0 }} style={{ ...styles.checkbox, borderColor: isBlack ? '#393A4B' : '#E3E4F1' }}>
           {completed && <Image source={require('../assets/icon-check.png')} />}
         </LinearGradient>
-      </TouchableOpacity>
+      </Pressable>
       <TextInput
-        style={{ ...styles.textInput, color: isBlack ? '#FFFFFF' : '#000000' }}
-        placeholder="Add a new todo" placeholderTextColor={isBlack ? '#5B5E7E' : '#9495A5'}
+        style={{ ...styles.textInput, color: isBlack ? '#C8CBE7' : '#393A4B' }}
+        placeholder="Add a new todo"
+        placeholderTextColor={isBlack ? '#5B5E7E' : '#9495A5'}
         onSubmitEditing={addListener}
         value={text}
         onChangeText={changeHandler}

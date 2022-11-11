@@ -21,6 +21,7 @@ export default function Filters({ isBlack, filterType, setFilterType, setFiltere
       {filters.map(filter => {
         return (
           <Pressable
+            hitSlop={10}
             key={filter.id}
             onPress={() => handleFilter(filter.text)}
           >

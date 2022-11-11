@@ -36,7 +36,7 @@ export default function AddToDo({ toDos, setToDos, isBlack, filteredToDos, setFi
   }
   return (
     <View style={{ ...styles.container, backgroundColor: isBlack ? '#25273D' : '#FFFFFF' }}>
-      <Pressable onPress={() => setCompleted(prev => !prev)} >
+      <Pressable hitSlop={10} onPress={() => setCompleted(prev => !prev)} >
         <LinearGradient colors={completed ? ['#55DDFF', '#C058F3'] : ['transparent', 'transparent']} star={{ x: 0.75, y: 0 }} style={{ ...styles.checkbox, borderColor: isBlack ? '#393A4B' : '#E3E4F1' }}>
           {completed && <Image source={require('../assets/icon-check.png')} />}
         </LinearGradient>
@@ -74,4 +74,10 @@ const styles = StyleSheet.create({
     marginRight: 12,
     borderWidth: 1,
   },
+  textInput: {
+    fontSize: 16,
+    fontWeight: "500",
+    flex: 1,
+    width: "100%",
+  }
 })

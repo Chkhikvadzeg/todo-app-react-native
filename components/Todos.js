@@ -1,6 +1,6 @@
 import Todo from "./Todo"
 import AddToDo from "./AddToDo"
-import { StyleSheet, SafeAreaView, FlatList, View, Text, TouchableOpacity } from "react-native"
+import { StyleSheet, SafeAreaView, FlatList, View, Text, Pressable } from "react-native"
 import Filters from "./Filters"
 
 export default function ToDos({ toDos, setToDos, removeTodo, isBlack, filteredToDos, setFilteredToDos, filterType, setFilterType }) {
@@ -22,10 +22,11 @@ export default function ToDos({ toDos, setToDos, removeTodo, isBlack, filteredTo
             <Text style={{ ...styles.text, color: isBlack ? '#5B5E7E' : '#9495A5' }}>
               {toDos.filter(todo => !todo.completed).length} items left
             </Text>
-            <TouchableOpacity
+            <Pressable
+              hitSlop={15}
               onPress={clearCompleted}>
               <Text style={{ ...styles.text, color: isBlack ? '#5B5E7E' : '#9495A5' }}>Clear Completed</Text>
-            </TouchableOpacity>
+            </Pressable>
           </View>
         </View>
         <Filters filterType={filterType} setFilterType={setFilterType} toDos={toDos} setToDos={setToDos} filteredToDos={filteredToDos} setFilteredToDos={setFilteredToDos} isBlack={isBlack} />

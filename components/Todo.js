@@ -61,5 +61,6 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 12,
     lineHeight: 12,
+    width: '85%',
   }
 })

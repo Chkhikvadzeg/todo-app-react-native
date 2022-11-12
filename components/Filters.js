@@ -21,8 +21,8 @@ export default function Filters({ isBlack, filterType, setFilterType, setFiltere
       {filters.map(filter => {
         return (
           <Pressable
-            hitSlop={10}
             key={filter.id}
+            style={styles.pressable}
             onPress={() => handleFilter(filter.text)}
           >
             <Text style={{ ...styles.text, color: filterType === filter.text ? '#3A7CFD' : isBlack ? '#5B5E7E' : '#9495A5' }}>{filter.text}</Text>
@@ -41,13 +41,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 16,
     marginHorizontal: 20,
-    paddingVertical: 16,
     borderRadius: 10,
+    height: 45,
   },
   text: {
-    marginLeft: 18,
     fontSize: 14,
     lineHeight: 14,
     fontWeight: '700',
+  },
+  pressable: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: '100%',
+    width: '20%',
   }
 })

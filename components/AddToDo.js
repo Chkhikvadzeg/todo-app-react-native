@@ -1,4 +1,5 @@
 import { View, StyleSheet, Image, TextInput, Pressable } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import React, { useState, useRef } from 'react'
 import { LinearGradient } from 'expo-linear-gradient'
 
@@ -15,6 +16,9 @@ export default function AddToDo({ toDos, setToDos, isBlack, filteredToDos, setFi
       { id: toDos.length > 0 ? toDos[toDos.length - 1].id + 1 : 0, text: e.nativeEvent.text, completed }
       ]
     )
+    AsyncStorage.setItem('toDos', JSON.stringify([...toDos,
+    { id: toDos.length > 0 ? toDos[toDos.length - 1].id + 1 : 0, text: e.nativeEvent.text, completed }
+    ]))
     const newFilteredToDos = () => {
       if (completed) {
         if (filterType === 'Completed' || filterType === 'All') {

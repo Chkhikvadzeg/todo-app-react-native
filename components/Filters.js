@@ -54,6 +54,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     height: '100%',
-    width: '20%',
+    width: '25%',
   }
 })

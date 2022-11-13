@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { TouchableOpacity, View, Text, StyleSheet } from "react-native"
 import Checkbox from "./Checkbox"
 import IconX from "./IconX";
@@ -14,6 +15,7 @@ export default function Todo({ todo, removeTodo, toDos, setToDos, isBlack, setFi
       return item
     });
     setToDos(newToDos)
+    AsyncStorage.setItem('toDos', JSON.stringify(newToDos));
 
     if (filterType === "Active") {
       setFilteredToDos(newToDos.filter((todo) => !todo.completed))
@@ -61,6 +63,6 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 12,
     lineHeight: 12,
-    width: '85%',
+    maxWidth: 280,
   }
 })

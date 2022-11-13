@@ -2,11 +2,13 @@ import Todo from "./Todo"
 import AddToDo from "./AddToDo"
 import { StyleSheet, SafeAreaView, FlatList, View, Text, Pressable } from "react-native"
 import Filters from "./Filters"
+import AsyncStorage from "@react-native-async-storage/async-storage"
 
 export default function ToDos({ toDos, setToDos, removeTodo, isBlack, filteredToDos, setFilteredToDos, filterType, setFilterType }) {
   const clearCompleted = () => {
     setToDos(toDos.filter((todo) => !todo.completed))
     setFilteredToDos(filteredToDos.filter((todo) => !todo.completed))
+    AsyncStorage.setItem("toDos", JSON.stringify(toDos.filter((todo) => !todo.completed)))
   }
   return (
     <SafeAreaView>

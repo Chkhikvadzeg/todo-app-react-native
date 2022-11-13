@@ -4,12 +4,15 @@ import SunIcon from './Sun';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Header({ isBlack, setIsBlack }) {
-
+  const changeTheme = () => {
+    setIsBlack(!isBlack);
+    AsyncStorage.setItem('isBlack', JSON.stringify(!isBlack));
+  }
 
   return (
     <View style={styles.header}>
       <Image style={styles.logo} source={require('../assets/logo.png')} />
-      <Pressable hitSlop={30} style={({ pressed }) => ({ opacity: pressed ? 0.2 : 1 })} onPress={() => setIsBlack(prev => !prev)}>
+      <Pressable hitSlop={30} style={({ pressed }) => ({ opacity: pressed ? 0.2 : 1 })} onPress={changeTheme}>
         {isBlack ? <SunIcon /> : <MoonIcon />}
       </Pressable>
     </View>

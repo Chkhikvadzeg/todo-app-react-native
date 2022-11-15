@@ -2,6 +2,7 @@ import { View, StyleSheet, Image, TextInput, Pressable } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import React, { useState, useRef } from 'react'
 import { LinearGradient } from 'expo-linear-gradient'
+import CheckIcon from './CheckIcon'
 
 export default function AddToDo({ toDos, setToDos, isBlack, filteredToDos, setFilteredToDos, filterType }) {
   const [completed, setCompleted] = useState(false)
@@ -42,7 +43,7 @@ export default function AddToDo({ toDos, setToDos, isBlack, filteredToDos, setFi
     <View style={{ ...styles.container, backgroundColor: isBlack ? '#25273D' : '#FFFFFF' }}>
       <Pressable hitSlop={10} onPress={() => setCompleted(prev => !prev)} >
         <LinearGradient colors={completed ? ['#55DDFF', '#C058F3'] : ['transparent', 'transparent']} star={{ x: 0.75, y: 0 }} style={{ ...styles.checkbox, borderColor: isBlack ? '#393A4B' : '#E3E4F1' }}>
-          {completed && <Image source={require('../assets/icon-check.png')} />}
+          {completed && <CheckIcon />}
         </LinearGradient>
       </Pressable>
       <TextInput
